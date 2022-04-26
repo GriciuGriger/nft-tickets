@@ -1,6 +1,7 @@
 pragma solidity ^0.8.0;
 
 import "./TicketPool.sol";
+import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 
 contract Community is TicketPool, PausableUpgradeable {
 

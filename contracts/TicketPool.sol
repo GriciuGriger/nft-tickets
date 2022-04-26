@@ -1,11 +1,10 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/ERC721URIStorageUpgradeable.sol";
 
-contract TicketPool is ERC721Upgradeable, OwnableUpgradeable {
+contract TicketPool is ERC721URIStorageUpgradeable, OwnableUpgradeable {
 
     address payable internal withdrawalAddress;
 
@@ -63,7 +62,7 @@ contract TicketPool is ERC721Upgradeable, OwnableUpgradeable {
         Ticket memory _ticket = Ticket({
             ID: Id_,
             belongsTo: belongsTo_,
-            URI: _baseURI()
+            URI: tokenURI(Id_)
         });
 
         tickets.push(_ticket);
@@ -87,11 +86,6 @@ contract TicketPool is ERC721Upgradeable, OwnableUpgradeable {
 
     function _changeWithdrawalAddress(address newWithdrawalAddress_) private onlyOwner {
         withdrawalAddress = payable(newWithdrawalAddress_);
-    }
-
-    function _baseURI() internal pure override returns (string memory) {
-        //URI creation to be implemented
-        return "";
     }
 
 }
