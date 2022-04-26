@@ -15,13 +15,13 @@ contract TicketPool is ERC721URIStorageUpgradeable, OwnableUpgradeable {
     event ETHWithdrawn(address _by, address _to, uint256 _amount);
     event TicketMinted(address _to, uint256 ID);
 
-    struct EventDate 
+    struct SaleDate 
     {
-        uint256 saleStart;
-        uint256 saleEnd;
+        uint256 start;
+        uint256 end;
     }
 
-    EventDate internal eventDate;
+    SaleDate internal saleDate;
 
      struct Ticket {
         uint256 ID;
@@ -53,8 +53,8 @@ contract TicketPool is ERC721URIStorageUpgradeable, OwnableUpgradeable {
             _safeTicketMint(admin_, i);
         }
 
-        eventDate.saleStart = eventSaleStart_;
-        eventDate.saleEnd = eventSaleEnd_;
+        saleDate.start = eventSaleStart_;
+        saleDate.end = eventSaleEnd_;
     }
 
     function _createTicket(uint256 Id_, address belongsTo_) internal {
